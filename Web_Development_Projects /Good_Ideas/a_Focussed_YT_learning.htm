@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Focused YouTube Learning</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            background-color: #f7f7f7;
+            padding-top: 30px;
+        }
+        .container {
+            max-width: 800px;
+        }
+        iframe {
+            width: 100%;
+            height: 400px;
+            margin-bottom: 20px;
+            border: 0;
+        }
+        .video-list li {
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h1 class="text-center mb-4">Focused YouTube Learning</h1>
+
+    <!-- Input Section -->
+    <div class="input-group mb-3">
+        <input id="youtubeUrl" type="text" class="form-control" placeholder="Paste YouTube URL here" aria-label="YouTube URL">
+        <div class="input-group-append">
+            <button class="btn btn-primary" type="button" onclick="addVideo()">Add Video</button>
+        </div>
+    </div>
+
+    <!-- Embedded Video Section -->
+    <h4>Current Video</h4>
+    <div id="videoContainer">
+        <p class="text-muted">Paste a YouTube URL above to load a video.</p>
+    </div>
+
+    <!-- To-Do List Section -->
+    <h4>To-Do List of Videos</h4>
+    <ul id="videoList" class="list-group video-list">
+    </ul>
+</div>
+
+<!-- Bootstrap and JavaScript Libraries -->
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.2/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+<!-- Custom JavaScript -->
+<script>
+    // Function to extract video ID from YouTube URL
+    function getYouTubeID(url) {
+        var videoID = '';
+        if (url.includes("v=")) {
+            videoID = url.split('v=')[1];
+            var ampersandPosition = videoID.indexOf('&');
+            if (ampersandPosition !== -1) {
+                videoID = videoID.substring(0, ampersandPosition);
+            }
+        } else if (url.includes('youtu.be')) {
+            videoID = url.split('.be/')[1];
+        }
+        return videoID;
+    }
+
+    // Function to add video to the list and embed it
+    function addVideo() {
+        var url = document.getElementById("youtubeUrl").value;
+        if (url === '') {
+            alert('Please enter a valid YouTube URL');
+            return;
+        }
+        
+        // Get YouTube video ID
+        var videoID = getYouTubeID(url);
+        if (!videoID) {
+            alert('Invalid YouTube URL');
+            return;
+        }
+
+        // Embed the video
+        document.getElementById("videoContainer").innerHTML = `<iframe src="https://www.youtube.com/embed/${videoID}?rel=0&autoplay=1" allowfullscreen></iframe>`;
+
+        // Add video to to-do list
+        var listItem = `<li class="list-group-item d-flex justify-content-between align-items-center">
+            <a href="#" onclick="embedVideo('${videoID}')">Watch Video</a>
+            <button class="btn btn-danger btn-sm" onclick="removeVideo(this)">Remove</button>
+        </li>`;
+        document.getElementById("videoList").insertAdjacentHTML('beforeend', listItem);
+
+        // Clear input field
+        document.getElementById("youtubeUrl").value = '';
+    }
+
+    // Function to embed video when clicked from the list
+    function embedVideo(videoID) {
+        document.getElementById("videoContainer").innerHTML = `<iframe src="https://www.youtube.com/embed/${videoID}?rel=0&autoplay=1" allowfullscreen></iframe>`;
+    }
+
+    // Function to remove video from the list
+    function removeVideo(element) {
+        element.parentElement.remove();
+    }
+</script>
+
+</body>
+</html>
+
