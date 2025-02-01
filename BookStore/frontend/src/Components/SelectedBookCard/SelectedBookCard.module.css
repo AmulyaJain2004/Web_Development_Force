@@ -1,0 +1,151 @@
+.BookCard {
+    display: flex;
+    flex-direction: column !important;
+    width: 250px;
+    margin: 1rem !important;
+    padding: 0 !important;
+    background-color: #e7c6fe;
+    color: #272138 !important;
+    font-size: 20px;
+    font-weight: 500;
+    border-radius: 15px !important;
+    position: relative;
+}
+
+.Details {
+    display: flex;
+    flex-direction: column;
+    /* Space out the children elements */
+    height: 100%;
+    width: 100%;
+    margin: 10px 15px 15px 15px;
+    align-items: center !important;
+    text-align: left !important;
+}
+
+.info {
+    width: 100%;
+    padding: 0 !important;
+    margin: 0 !important;
+}
+
+
+.Author {
+    text-align: left !important;
+    margin: 0px 0px 15px 0px;
+    font-size: 18px;
+}
+
+a {
+    text-decoration: none;
+    color: white !important;
+}
+
+.PublishYear {
+    text-align: left !important;
+    font-size: 15px;
+}
+
+
+p {
+    text-align: left !important;
+    text-justify: auto;
+    margin: 0;
+    padding: 0 !important;
+}
+
+.img {
+    border-radius: 15px 15px 0 0px !important;
+    height: auto;
+    transition: transform 0.3s ease;
+}
+
+
+.hr {
+    width: 85%;
+    border: 1px solid #272138;
+    margin: 0px;
+    padding: 0;
+}
+
+.Title {
+    text-align: wrap;
+    word-wrap: break-word;
+
+}
+
+.BuyNow {
+    margin: 0 !important;
+    margin-top: 32% !important;
+}
+
+@media screen and (min-width: 480px) {
+    .img {
+        width: 250px !important;
+    }
+
+    .BookCard:hover .img {
+        transform: scale(1.1);
+    }
+
+}
+
+@media screen and (max-width: 470px) {
+    .img {
+        width: 270px !important;
+        border-radius: 15px 15px 0 0 !important;
+        margin: 0 !important;
+
+    }
+
+    .BookCard {
+        flex-direction: column;
+        width: 270px;
+    }
+
+    .Details {
+        margin: 15px 0 !important;
+        padding: 0 !important;
+        display: flex !important;
+        flex-direction: column !important;
+        justify-content: center !important;
+        align-items: center !important;
+        width: 100%;
+    }
+
+    p {
+        text-align: center !important;
+        text-justify: auto;
+        margin: 0 !important;
+        padding: 0 !important;
+    }
+
+    .Author {
+        margin: 0 !important;
+        text-align: center !important;
+    }
+
+    .PublishYear {
+        margin: 0 !important;
+        text-align: center !important;
+    }
+
+    .info {
+        margin: 0 !important;
+        width: 95%;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        text-align: center !important;
+    }
+
+    .hr {
+        width: 95%;
+        border: 1px solid #272138;
+        margin: 0px;
+        padding: 0;
+    }
+
+
+}

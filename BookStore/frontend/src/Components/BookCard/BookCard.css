@@ -1,0 +1,210 @@
+.BookCard {
+    display: flex;
+    width: 475px;
+    min-height: 300px;
+    margin: 1rem !important;
+    padding: 0 !important;
+    background-color: #e7c6fe;
+    color: #272138 !important;
+    font-size: 20px;
+    font-weight: 500;
+    border-radius: 15px !important;
+    position: relative;
+}
+
+.Details {
+    display: flex;
+    flex-direction: column;
+    /* Space out the children elements */
+    height: 100%;
+    width: 100%;
+    margin: 10px 15px 15px 15px;
+    align-items: center !important;
+    text-align: left !important;
+}
+
+.Title {
+    text-align: wrap;
+    word-wrap: break-word;
+
+}
+
+.info {
+    width: 100%;
+    padding: 0 !important;
+    margin: 0 !important;
+}
+
+
+.Author {
+    text-align: left !important;
+    margin: 0px 0px 15px 0px;
+    font-size: 18px;
+}
+
+a {
+    text-decoration: none;
+    color: white !important;
+}
+
+.PublishYear {
+    text-align: left !important;
+    font-size: 15px;
+}
+
+
+p {
+    text-align: left !important;
+    text-justify: auto;
+    margin: 0;
+    padding: 0 !important;
+}
+
+img {
+    min-width: 200px;
+    border-radius: 15px 0 0px 15px !important;
+    height: auto;
+    transition: transform 0.3s ease;
+}
+
+
+.hr {
+    width: 100%;
+    border: 1px solid #272138;
+    margin: 5px 0px;
+    padding: 0 5px;
+}
+
+.BuyNow {
+    margin: 0 !important;
+    margin-top: 32% !important;
+}
+
+@media screen and (min-width: 480px) {
+    img {
+        width: 200px !important;
+    }
+
+    .BookCard:hover img {
+        transform: scale(1.15);
+    }
+
+}
+
+@media screen and (max-width: 470px) {
+    img {
+        width: 350px !important;
+        border-radius: 15px 15px 0 0 !important;
+        margin: 0 !important;
+
+    }
+
+    .BookCard {
+        flex-direction: column;
+        width: 350px;
+    }
+
+    .Details {
+        margin: 15px 0 !important;
+        padding: 0 !important;
+        display: flex !important;
+        flex-direction: column !important;
+        justify-content: center !important;
+        align-items: center !important;
+        width: 100%;
+    }
+
+    p {
+        text-align: center !important;
+        text-justify: auto;
+        margin: 0 !important;
+        padding: 0 !important;
+    }
+
+    .Author {
+        margin: 0 !important;
+        text-align: center !important;
+    }
+
+    .PublishYear {
+        margin: 0 !important;
+        text-align: center !important;
+    }
+
+    .info {
+        margin: 0 !important;
+        width: 95%;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        text-align: center !important;
+    }
+
+    .hr {
+        width: 95%;
+        border: 1px solid #272138;
+        margin: 0px;
+        padding: 0;
+    }
+
+    .BuyNow {
+        margin: 5% 0 !important;
+    }
+
+
+}
+
+
+
+
+/** DELETE TOAST CSS **/
+
+.DeleteToast {
+    display: flex;
+    flex-direction: column;
+    background-color: #f8f9fa;
+    border-radius: 8px;
+    max-width: 300px;
+    text-align: center !important;
+}
+
+
+.buttons {
+    margin: 0px;
+    margin-top: 10px;
+    display: flex;
+    justify-content: space-around;
+}
+
+.Delete {
+    background-color: #e74c3c;
+    color: white;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 14px;
+    text-transform: uppercase;
+    transition: background-color 0.2s ease;
+}
+
+.Delete:hover {
+    background-color: #c0392b;
+}
+
+.Cancel {
+    background-color: #95a5a6;
+    color: white;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 14px;
+    text-transform: uppercase;
+    transition: background-color 0.2s ease;
+}
+
+.Cancel:hover {
+    background-color: #7f8c8d;
+}

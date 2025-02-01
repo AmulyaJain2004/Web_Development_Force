@@ -1,0 +1,14 @@
+{
+  "name": "book-store",
+  "version": "1.0.0",
+  "main": "index.js",
+  "type": "module",
+
+  "scripts": {
+    "dev": "concurrently \"cd backend && npm run dev\" \"cd frontend && npm run dev\"",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "description": ""
+}
