@@ -1,21 +1,21 @@
 {
   "name": "backend",
   "version": "1.0.0",
+  "description": "",
   "main": "index.js",
-  "type": "module",
   "scripts": {
-    "dev": "nodemon index.js"
+    "dev": "nodemon index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
   },
+  "keywords": [],
   "author": "",
   "license": "ISC",
-  "description": "",
+  "type": "module",
   "dependencies": {
-    "bcrypt": "^5.1.1",
-    "compression": "^1.7.5",
     "cors": "^2.8.5",
-    "express": "^4.21.0",
-    "mongoose": "^8.7.0",
-    "nodemon": "^3.1.7",
-    "redis": "^4.7.0"
+    "express": "^4.21.2",
+    "mongodb": "^6.13.0",
+    "mongoose": "^8.9.6",
+    "nodemon": "^3.1.9"
   }
 }
