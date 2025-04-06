@@ -42,5 +42,4 @@ const adminOnly = (req, res, next) => {
     }
 }
 
-
 export { protect, adminOnly };
