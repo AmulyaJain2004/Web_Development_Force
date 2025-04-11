@@ -4,6 +4,8 @@ import { useNavigate, Link } from "react-router-dom";
 import Input from "../../components/Inputs/Input.jsx";
 import { validateEmail } from "../../utils/helper.js";
 import { UserContext } from "../../context/userContext.jsx";
+import axiosInstance from "../../utils/axiosInstance.js";
+import {API_PATHS} from "../../utils/apiPaths.js";
 
 const Login = () => {
   const [email, setEmail] = useState("");
@@ -35,12 +37,13 @@ const Login = () => {
         password,
       });
       const { token, role } = response.data;
+      console.log("LOGIN RESPONSE:", response.data);
 
       if (token) {
         localStorage.setItem("token", token); // Store token in local storage
         updateUser(response.data); // Update user context
         // Redirect based on role
-        if (role === "Admin") {
+        if (role === "admin") {
           navigate("/admin/dashboard");
         } else {
           navigate("/user/dashboard");
@@ -70,6 +73,7 @@ const Login = () => {
             label="Email Address"
             placeholder="example@gmail.com"
             type="text"
+            autoComplete="username"
           />
           <Input
             value={password}
@@ -77,6 +81,7 @@ const Login = () => {
             label="Password"
             placeholder="Min 8 characters"
             type="password"
+            autoComplete="current-password"
           />
 
           {error && <p className="text-red-500 text-xs pb-2.5 mt-2">{error}</p>}

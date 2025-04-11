@@ -102,6 +102,7 @@ const Signup = () => {
               label="Full Name"
               placeholder="John"
               type="text"
+              autoComplete="name"
             />
 
             <Input
@@ -110,6 +111,7 @@ const Signup = () => {
                   label="Email Address"
                   placeholder="example@gmail.com"
                   type="text"
+                  autoComplete="username"
             />
             <Input
                 value={password}

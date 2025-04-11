@@ -1,5 +1,5 @@
-import React, { use } from 'react'
-import {useUserAuth} from '../../context/UserAuthContext'
+import React from 'react'
+import {useUserAuth} from '../../hooks/useUserAuth'
 
 const UserDashboard = () => {
   useUserAuth();
