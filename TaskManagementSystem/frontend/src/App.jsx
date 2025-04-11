@@ -1,25 +1,26 @@
 import React from 'react';
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import { BrowserRouter as Router, Routes, Route, Outlet } from "react-router-dom";
 
-import Dashboard from "./pages/Admin/Dashboard";
+import Dashboard from "./pages/Admin/Dashboard.jsx";
 
-import Login from "./pages/Auth/Login";
-import SignUp from "./pages/Auth/Signup";
+import Login from "./pages/Auth/Login.jsx";
+import SignUp from "./pages/Auth/Signup.jsx";
 
-import ManageTasks from "./pages/Admin/ManageTasks";
-import CreateTask from "./pages/Admin/CreateTask";
-import ManageUsers from "./pages/Admin/ManageUsers";
+import ManageTasks from "./pages/Admin/ManageTasks.jsx";
+import CreateTask from "./pages/Admin/CreateTask.jsx";
+import ManageUsers from "./pages/Admin/ManageUsers.jsx";
 
-import UserDashboard from './pages/User/UserDashboard';
-import MyTasks from './pages/User/MyTasks';
-import ViewTaskDetails from './pages/User/ViewTaskDetails';
+import UserDashboard from './pages/User/UserDashboard.jsx';
+import MyTasks from './pages/User/MyTasks.jsx';
+import ViewTaskDetails from './pages/User/ViewTaskDetails.jsx';
 
-import PrivateRoute from './routes/PrivateRoute';
+import PrivateRoute from './routes/PrivateRoute.jsx';
+import UserProvider, {UserContext} from './context/userContext.jsx';
 
 const App = () => {
   return (
+    <UserProvider>
     <div>
-      {/* need to understand below part */}
       <Router>
         <Routes>
           <Route path="/login" element={<Login/>} />
@@ -40,10 +41,26 @@ const App = () => {
             <Route path="/user/tasks-details/:id" element={<ViewTaskDetails/>} />
           </Route>
 
+          {/*Default Route*/}
+          <Route path="/" element={<Root/>} />
+
         </Routes>
       </Router>
     </div>
+    </UserProvider>
   )
 }
 
-export default App
+export default App;
+
+const Root = () => {
+  const {user, loading} = useUserContext(UserContext);
+
+  if (loading) return <Outlet/>;
+
+  if (!user){
+    return <Navigate to="/login" />;
+  }
+
+  return user.role === "admin" ? <Navigate to="/admin/dashboard" /> : <Navigate to="/user/dashboard" />;
+}

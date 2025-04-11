@@ -1,6 +1,14 @@
-import React, { useState } from 'react'
+import React, { useState, useContext } from 'react'
+import { Link, useNavigate } from 'react-router-dom'
+import { validateEmail } from '../../utils/helper.js'
 import AuthLayout from '../../components/layouts/AuthLayout.jsx'
-import ProfilePhotoSelector from '../../Inputs/ProfilePhotoSelector.jsx'
+import Input from '../../components/Inputs/Input.jsx'
+import ProfilePhotoSelector from "../../components/Inputs/ProfilePhotoSelector.jsx"
+import { API_PATHS } from '../../utils/apiPaths.js'
+import { UserContext } from "../../context/userContext.jsx";
+import  uploadImage from '../../utils/uploadImage.js'
+import axiosInstance from '../../utils/axiosInstance.js'
+
 
 const Signup = () => {
   const [profilePic, setProfilePic] = useState(null);
@@ -11,11 +19,14 @@ const Signup = () => {
 
   const [error, setError] = useState(null);
 
+  const { updateUser } = useContext(UserContext); // Get updateUser function from context
+  const navigate = useNavigate();
   // Handle Signup Form Submit 
   const handleSignUp = async (e) => {
       e.preventDefault();
 
-      if (!fullName(email)){
+      let profileImageUrl = '';
+      if (!fullName){
         setError("Please enter full name");
         return;
       }
@@ -34,7 +45,42 @@ const Signup = () => {
       setError("");
 
       // SignUp API Call
+      try {
 
+        // Upload image if present
+        if (profilePic) {
+          const imgUploadRes = await uploadImage(profilePic);
+          profileImageUrl = imgUploadRes.imageUrl || "";
+        }
+        const response = await axiosInstance.post(API_PATHS.AUTH.REGISTER, {
+          name: fullName,
+          email,
+          password,
+          profileImageUrl,
+          adminInviteToken,
+        });
+
+        const { token, role } = response.data;
+        if (token) {
+          localStorage.setItem("token", token); // Store token in local storage
+          updateUser(response.data); // Update user context
+          // Redirect based on role
+          if (role === "Admin") {
+            navigate("/admin/dashboard");
+          }
+          else {
+            navigate("/user/dashboard");
+          }
+        }
+      }
+      catch (error) {
+        if (error.response && error.response.data.message) {
+          setError(error.response.data.message);
+        }
+        else {
+          setError ("Something went wrong. Please try again")
+        }
+      }
   };
   
 
@@ -49,6 +95,7 @@ const Signup = () => {
         <form onSubmit={handleSignUp}>
           <ProfilePhotoSelector image = {profilePic} setImage={setProfilePic} />
           <div className='grid grid-cols-1 md:grid-cols-2 gap-4'>
+
             <Input
               value={fullName}
               onChange={({target}) => setFullName(target.value)}
@@ -70,11 +117,12 @@ const Signup = () => {
                 label="Password"
                 placeholder="Min 8 characters"
                 type="password"
+                autoComplete="current-password"
             />
 
             <Input
-                value={password}
-                onChange={({target}) => setPassword(target.value)}
+                value={ adminInviteToken}
+                onChange={({target}) => setAdminInviteToken(target.value)}
                 label="Admin Invite Token"
                 placeholder="6 Digit Code"
                 type="text"
