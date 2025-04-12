@@ -18,6 +18,7 @@ const TaskListTable = ({tableData}) => {
       default: return 'bg-gray-100 text-gray-500 border border-gray-200';
     }
   }
+  
   return (
     <div className='overflow-x-auto p-0 rounded-lg mt-3'> 
       <table className='min-w-full'>
@@ -30,7 +31,7 @@ const TaskListTable = ({tableData}) => {
           </tr>
         </thead>
         <tbody>
-          {tableData.map((task) => (
+          {(tableData || []).map((task) => (
             <tr key={task._id} className='border-t border-gray-200'>
               <td className='my-3 mx-4 text-gray-700 text-[13px] line-clamp-1 overflow-hidden'>{task.title}</td>
               <td className='py-4 px-4'>

@@ -37,7 +37,6 @@ const Login = () => {
         password,
       });
       const { token, role } = response.data;
-      console.log("LOGIN RESPONSE:", response.data);
 
       if (token) {
         localStorage.setItem("token", token); // Store token in local storage
