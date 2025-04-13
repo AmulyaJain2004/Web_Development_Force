@@ -9,7 +9,8 @@ import moment from 'moment'
 import {LuTrash2} from 'react-icons/lu'
 import SelectDropdown from '../../components/Inputs/SelectDropdown'
 import SelectUsers from '../../components/Inputs/SelectUsers'
-
+import TodoListInput from '../../components/Inputs/ToDoListInput'
+import AddAttachmentsInput from '../../components/Inputs/AddAttachmentsInput'
 
 const CreateTask = () => {
   const location = useLocation();
@@ -162,6 +163,32 @@ const CreateTask = () => {
                 />
               </div>
 
+            </div>
+
+            <div className='mt-3'>
+              <label className="text-xs font-medium text-slate-600">
+                TODO Checklist
+              </label>
+
+              <TodoListInput 
+                todolist={taskData?.todoChecklist}
+                setTodoList={(value) => 
+                  handleValueChange("todoChecklist", value)
+                }
+              />
+            </div>
+
+            <div className=''>
+              <label className="">
+                Add Attachments
+              </label>
+
+              <AddAttachmentsInput
+                attachments={taskData?.attachments}
+                setAttachments={(value) => 
+                  handleValueChange("attachments", value)
+                }
+              />
             </div>
           </div>
         </div>
