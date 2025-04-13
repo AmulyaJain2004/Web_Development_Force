@@ -65,7 +65,7 @@ const Signup = () => {
           localStorage.setItem("token", token); // Store token in local storage
           updateUser(response.data); // Update user context
           // Redirect based on role
-          if (role === "Admin") {
+          if (role === "admin") {
             navigate("/admin/dashboard");
           }
           else {

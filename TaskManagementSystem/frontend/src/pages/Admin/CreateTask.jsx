@@ -56,10 +56,67 @@ const CreateTask = () => {
   };
 
   // Create Task
-  const CreateTask = async () => {};
+  const createTask = async () => {
+    setLoading(true);
+    try {
+      const todolist = taskData.todoChecklist?.map((item) => ({
+        task: item,
+        completed: false,
+      }));
 
+      const response = await axiosInstance.post(API_PATHS.TASKS.CREATE_TASK, {
+        ...taskData,
+        dueDate: new Date(taskData.dueDate).toISOString(),
+        todoChecklist: todolist,
+      });
+      
+      toast.success("Task Created Successfully");
+      clearData();
+    } 
+    catch (error) {
+      console.error("Error creating task:", error);
+      setLoading(false);
+    } 
+    finally {
+      setLoading(false);
+    }
+  };
   // Update Task
-  const UpdateTask = async () => {};
+  const updateTask = async () => {};
+
+  const handleSubmit = async () => {
+    setError(null);
+    // Input Validation
+    if (!taskData.title.trim()) {
+      setError("Title is required");
+      return;
+    }
+    if (!taskData.description.trim()) {
+      setError("Description is required");
+      return;
+    }
+
+    if (!taskData.dueDate) {
+      setError("Due date is required");
+      return;
+    }
+    if (taskData.assignedTo?.length === 0) {
+      setError("Task not assigned to any member");
+      return;
+    }
+
+    if (taskData.todoChecklist?.length === 0) {
+      setError("Add at least one todo task");
+      return;
+    }
+
+    if (taskId){
+      updateTask();
+      return;
+    }
+
+    createTask();
+  };
 
   // get Task info by ID
   const getTaskDetailsById = async () => {};
@@ -133,7 +190,6 @@ const CreateTask = () => {
                 />
               </div>
 
-
               <div className='col-span-6 md:col-span-4'>
                 <label className="text-xs font-medium text-slate-600">
                   Due Date
@@ -142,7 +198,7 @@ const CreateTask = () => {
                 <input 
                   placeholder="Create App UI" 
                   className='form-input'
-                  value={taskData.dueDate}
+                  value={taskData.dueDate || ""}
                   onChange={({target}) =>
                     handleValueChange("dueDate", target.value)
                   }
@@ -162,7 +218,6 @@ const CreateTask = () => {
                   }}
                 />
               </div>
-
             </div>
 
             <div className='mt-3'>
@@ -178,8 +233,8 @@ const CreateTask = () => {
               />
             </div>
 
-            <div className=''>
-              <label className="">
+            <div className='mt-3'>
+              <label className="text-xs font-medium text-slate-600">
                 Add Attachments
               </label>
 
@@ -190,10 +245,23 @@ const CreateTask = () => {
                 }
               />
             </div>
+
+            {error && (
+              <p className='text-xs font-medium text-red-500 mt-5'>{error}</p>
+            )}
+            
+            <div className='flex justify-end mt-7'>
+              <button
+                className='add-btn'
+                onClick={handleSubmit}
+                disabled={loading}
+              >
+                {taskId ? "UPDATE TASK" : "CREATE TASK"}
+              </button>
+            </div>
           </div>
         </div>
       </div>
-
     </DashboardLayout >
   )
 }

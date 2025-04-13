@@ -1,7 +1,7 @@
 import React, {useState} from 'react'
 import {HiMiniPlus, HiOutlineTrash} from 'react-icons/hi2'
 
-const ToDoListInput = ({todoList, setTodoList}) => {
+const ToDoListInput = ({todoList = [], setTodoList}) => {
     const [option, setOption] = useState("");
 
     // Function to handle adding an option
