@@ -1,8 +1,8 @@
 import React from 'react';
 import { BrowserRouter as Router, Routes, Route, Outlet } from "react-router-dom";
-
+import { useContext } from 'react';
 import Dashboard from "./pages/Admin/Dashboard.jsx";
-
+import { Navigate } from "react-router-dom";
 import Login from "./pages/Auth/Login.jsx";
 import SignUp from "./pages/Auth/Signup.jsx";
 
@@ -64,7 +64,7 @@ const App = () => {
 export default App;
 
 const Root = () => {
-  const {user, loading} = UserContext(UserContext);
+  const {user, loading} = useContext(UserContext);
 
   if (loading) return <Outlet/>;
 

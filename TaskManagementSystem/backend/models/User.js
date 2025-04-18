@@ -21,7 +21,7 @@ const UserSchema = new mongoose.Schema(
         },
         role: {
             type: String,
-            enum: ["admin", "member"],
+            enum: ["admin", "member"], // Developer and tester
             default: "member", // Role-based access
         }
     },
