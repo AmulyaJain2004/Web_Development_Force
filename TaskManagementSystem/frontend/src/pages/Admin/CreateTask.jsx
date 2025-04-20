@@ -62,7 +62,7 @@ const CreateTask = () => {
     setLoading(true);
     try {
       const todolist = taskData.todoChecklist?.map((item) => ({
-        task: item,
+        text: item,
         completed: false,
       }));
 
