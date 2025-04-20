@@ -44,7 +44,24 @@ const ManageTasks = () => {
 
   // download task report
   const handleDownloadReport = async () => {
-    
+    try{  
+      const response = await axiosInstance.get(API_PATHS.REPORTS.EXPORT_TASKS, {
+        responseType: 'blob',
+      });
+
+      // Create a URL for the blob
+      const url = window.URL.createObjectURL(new Blob([response.data]));
+      const link = document.createElement('a');
+      link.href = url;
+      link.setAttribute("download", "task_details.xlsx"); // Specify the file name
+      document.body.appendChild(link);
+      link.click(); // Trigger the download
+      link.parentNode.removeChild(link); // Clean up the DOM
+      window.URL.revokeObjectURL(url); // Release the blob URL
+    } catch(error){
+      console.error("Error downloading expense details:", error);
+      toast.error("Failed to download expense details. Please try again.");
+    }
   };
 
   useEffect(() => {
