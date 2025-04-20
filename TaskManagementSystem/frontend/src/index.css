@@ -55,5 +55,5 @@
 }
 
 .user-card {
-    @apply bg-white p-4  rounded-xl shadow-md shadow-gray-100 border border-gray-20 
+    @apply bg-white p-4  rounded-xl shadow-md shadow-gray-100 border border-gray-200/50 ;
 }

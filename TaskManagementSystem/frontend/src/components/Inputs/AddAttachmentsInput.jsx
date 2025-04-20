@@ -7,7 +7,7 @@ const AddAttachmentsInput = ({attachments, setAttachments}) => {
   
   // Function to handle adding an option
   const handleAddOption = () => {
-    if (option.trim() === '') {
+    if (option.trim() !== '') {
       setAttachments([...attachments, option.trim()]);
       setOption("");
     }

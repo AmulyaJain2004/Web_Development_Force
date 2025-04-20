@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
 import { API_PATHS } from '../../utils/apiPaths.js'
-import { axiosInstance } from '../../utils/axiosInstance.js'
+import axiosInstance from '../../utils/axiosInstance.js'
 import DashboardLayout from '../../components/layouts/DashboardLayout'
 import moment from 'moment'
 import AvatarGroup from '../../components/AvatarGroup'

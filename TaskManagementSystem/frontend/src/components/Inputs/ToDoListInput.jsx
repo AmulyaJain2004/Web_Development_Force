@@ -1,7 +1,7 @@
 import React, {useState} from 'react'
 import {HiMiniPlus, HiOutlineTrash} from 'react-icons/hi2'
 
-const ToDoListInput = ({todoList = [], setTodoList}) => {
+const ToDoListInput = ({todoList, setTodoList}) => {
     const [option, setOption] = useState("");
 
     // Function to handle adding an option
@@ -29,6 +29,7 @@ const ToDoListInput = ({todoList = [], setTodoList}) => {
                     <span className='text-xs text-gray-400 font-semibold mr-2'>
                         {index < 9 ? `0${index + 1}` : index + 1}
                     </span>
+                    {item}
                 </p>
 
                 <button

@@ -71,7 +71,7 @@ const CreateTask = () => {
         dueDate: new Date(taskData.dueDate).toISOString(),
         todoChecklist: todolist,
       });
-      
+
       toast.success("Task Created Successfully");
       clearData();
     } 
@@ -91,20 +91,21 @@ const CreateTask = () => {
     try {
       const todolist = taskData.todoChecklist?.map((item) => {
         const prevTodoChecklist = currentTask?.todoChecklist || [];
-        const matchedTask =  prevTodoChecklist.find((task) => task.text == item);
-
+      
+        const matchedTask = prevTodoChecklist.find((task) => task?.text === item);
+      
         return {
           text: item,
-          completed: matchedTask ? matchedTask.completed : false,
+          completed: matchedTask?.completed || false,
         };
-    });
-    const response = await axiosInstance.put(
-      API_PATHS.TASKS.UPDATE_TASK(taskId),
-      {
-        ...taskData,
-        dueDate: new Date(taskData.dueDate).toISOString(),
-        todoChecklist: todolist,
-      }
+      });
+      const response = await axiosInstance.put(
+        API_PATHS.TASKS.UPDATE_TASK(taskId),
+        {
+          ...taskData,
+          dueDate: new Date(taskData.dueDate).toISOString(),
+          todoChecklist: todolist,
+        }
     );
     toast.success("Task Updated Successfully");
     }catch (error) {
@@ -283,7 +284,7 @@ const CreateTask = () => {
               </div>
 
               <div className='col-span-12 md:col-span-3'>
-                <label className="texst-xs font-medium text-slate-600">
+                <label className="text-xs font-medium text-slate-600">
                   Assign To
                 </label>
 
@@ -302,7 +303,7 @@ const CreateTask = () => {
               </label>
 
               <TodoListInput 
-                todolist={taskData?.todoChecklist}
+                todoList={taskData?.todoChecklist}
                 setTodoList={(value) => 
                   handleValueChange("todoChecklist", value)
                 }

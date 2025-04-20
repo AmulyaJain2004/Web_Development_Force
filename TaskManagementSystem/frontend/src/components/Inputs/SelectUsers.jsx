@@ -13,7 +13,7 @@ const SelectUsers = ({selectedUsers, setSelectedUsers}) => {
     const getAllUsers = async () => {
         try {
             const response = await axiosInstance.get(API_PATHS.USERS.GET_ALL_USERS);
-            if (response.status?.length > 0) {
+            if (response.status === 200) {
                 setAllUsers(response.data);
             }
         } 
@@ -23,11 +23,11 @@ const SelectUsers = ({selectedUsers, setSelectedUsers}) => {
     };
 
     const toggleUserSelection = (userId) => {
-        setTempSelectedUsers((prev) => {
-            prev.includes(userId) 
-            ? prev.filter((id) => id !== userId) 
-            : [...prev, userId];
-        });
+        setTempSelectedUsers((prev) =>
+            prev.includes(userId)
+                ? prev.filter((id) => id !== userId)
+                : [...prev, userId]
+        );
     };
 
     const handleAssign = () => {
@@ -111,4 +111,4 @@ const SelectUsers = ({selectedUsers, setSelectedUsers}) => {
     )
 }
 
-export default SelectUsers;
+export default SelectUsers; 
